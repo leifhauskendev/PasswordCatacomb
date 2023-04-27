@@ -4,10 +4,18 @@ using System.Text;
 
 public class PasswordInfo
 {
+    private string _user;
     private string _passwordName;
     private string _passwordString;
+    private byte[] _encyrptedPassword;
     private byte[] _aesKey;
     private byte[] _aesIV;
+
+    public string User
+    {
+        get { return _user; }
+        set { _user = value; }
+    }
 
     public string PasswordName
     {
@@ -19,6 +27,12 @@ public class PasswordInfo
     {
         get { return _passwordString; }
         set { _passwordString = value; }
+    }
+
+    public byte[] EncryptedPassword
+    {
+        get { return _encyrptedPassword; }
+        set { _encyrptedPassword = value; }
     }
 
     public byte[] AESKey
@@ -33,13 +47,14 @@ public class PasswordInfo
         set { _aesIV = value; }
     }
 
-    public PasswordInfo(string passwordName, string passwordString, byte[] aesKey, byte[] aesIV)
-    {
-        this._passwordName = passwordName;
-        this._passwordString = passwordString;
-        this._aesKey = aesKey;
-        this._aesIV = aesIV;
-    }
+    //public PasswordInfo(string passwordName, string passwordString, byte[] encyrptedPassword, byte[] aesKey, byte[] aesIV)
+    //{
+    //    this._passwordName = passwordName;
+    //    this._passwordString = passwordString;
+    //    this._encyrptedPassword = encyrptedPassword;
+    //    this._aesKey = aesKey;
+    //    this._aesIV = aesIV;
+    //}
 
     public byte[] GetEncryptedPassword()
     {

@@ -5,7 +5,7 @@ using System.Text;
 
 public static class AesHelper
 {
-    private static readonly byte[] salt = Encoding.UTF8.GetBytes("This is my salt!");
+    private static readonly byte[] salt = GenerateSalt();
 
     public static byte[] EncryptStringToBytes(string plainText, byte[] key, byte[] iv)
     {
@@ -84,5 +84,17 @@ public static class AesHelper
             return aes.IV;
         }
     }
+
+    public static byte[] GenerateSalt()
+    {
+        int saltLength = 16;
+        byte[] salt = new byte[saltLength];
+        using (var rng = new RNGCryptoServiceProvider())
+        {
+            rng.GetBytes(salt);
+        }
+        return salt;
+    }
+
 }
 
