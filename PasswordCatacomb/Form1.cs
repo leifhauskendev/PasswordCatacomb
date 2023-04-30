@@ -26,8 +26,6 @@ namespace PasswordCatacomb
 
         public Form1()
         {
-            LoginForm loginForm= new LoginForm();
-            loginForm.ShowDialog();
             InitializeComponent();
             PasswordInfo.User = constuser;
         }
