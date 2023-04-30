@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using PasswordCatacomb;
 
@@ -8,18 +9,25 @@ public static class UserDA
 
     public static void CreateRecord(UserInfo userInfo)
     {
-        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        try
         {
-            connection.Open();
-            using (MySqlCommand command = new MySqlCommand("INSERT INTO Users (User, Password, Salt, AESKey, AESIV) VALUES (@user, @password, @salt, @aes_key, @aes_iv)", connection))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                command.Parameters.AddWithValue("@user", userInfo.Username);
-                command.Parameters.AddWithValue("@password", userInfo.EncryptedPassword);
-                command.Parameters.AddWithValue("@salt", userInfo.Salt);
-                command.Parameters.AddWithValue("@aes_key", userInfo.AESKey);
-                command.Parameters.AddWithValue("@aes_iv", userInfo.AESIV);
-                command.ExecuteNonQuery();
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand("INSERT INTO Users (User, Password, Salt, AESKey, AESIV) VALUES (@user, @password, @salt, @aes_key, @aes_iv)", connection))
+                {
+                    command.Parameters.AddWithValue("@user", userInfo.Username);
+                    command.Parameters.AddWithValue("@password", userInfo.EncryptedPassword);
+                    command.Parameters.AddWithValue("@salt", userInfo.Salt);
+                    command.Parameters.AddWithValue("@aes_key", userInfo.AESKey);
+                    command.Parameters.AddWithValue("@aes_iv", userInfo.AESIV);
+                    command.ExecuteNonQuery();
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 

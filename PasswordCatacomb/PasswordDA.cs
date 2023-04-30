@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 public static class PasswordDA
@@ -8,18 +10,27 @@ public static class PasswordDA
 
     public static void CreateRecord(PasswordInfo passwordInfo)
     {
-        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        try
         {
-            connection.Open();
-            using (MySqlCommand command = new MySqlCommand("INSERT INTO PasswordData (User, PasswordName, Password, AESKey, AESIV) VALUES (@user, @password_name, @password, @aes_key, @aes_iv)", connection))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                command.Parameters.AddWithValue("@user", passwordInfo.User);
-                command.Parameters.AddWithValue("@password_name", passwordInfo.PasswordName);
-                command.Parameters.AddWithValue("@password", passwordInfo.EncryptedPassword);
-                command.Parameters.AddWithValue("@aes_key", passwordInfo.AESKey);
-                command.Parameters.AddWithValue("@aes_iv", passwordInfo.AESIV);
-                command.ExecuteNonQuery();
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand("INSERT INTO PasswordData (User, PasswordName, Password, AESKey, AESIV) VALUES (@user, @password_name, @password, @aes_key, @aes_iv)", connection))
+                {
+                    command.Parameters.AddWithValue("@user", passwordInfo.User);
+                    command.Parameters.AddWithValue("@password_name", passwordInfo.PasswordName);
+                    command.Parameters.AddWithValue("@password", passwordInfo.EncryptedPassword);
+                    command.Parameters.AddWithValue("@aes_key", passwordInfo.AESKey);
+                    command.Parameters.AddWithValue("@aes_iv", passwordInfo.AESIV);
+                    command.ExecuteNonQuery();
+                }
             }
+
+            MessageBox.Show("Password created successfully!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -42,7 +53,6 @@ public static class PasswordDA
                         result.EncryptedPassword = (byte[])reader.GetValue(reader.GetOrdinal("Password"));
                         result.AESKey = (byte[])reader.GetValue(reader.GetOrdinal("AESKey"));
                         result.AESIV = (byte[])reader.GetValue(reader.GetOrdinal("AESIV"));
-                        //Console.WriteLine($"{retrievedUser} {retrievedPasswordName} {BitConverter.ToString(password)} {BitConverter.ToString(aesKey)} {BitConverter.ToString(aesIV)}");
                     }
                 }
             }
@@ -52,33 +62,81 @@ public static class PasswordDA
 
     public static void UpdateRecord(PasswordInfo passwordInfo)
     {
-        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        try
         {
-            connection.Open();
-            using (MySqlCommand command = new MySqlCommand("UPDATE PasswordData SET Password=@password, AESKey=@aes_key, AESIV=@aes_iv WHERE User=@user AND PasswordName=@password_name", connection))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                command.Parameters.AddWithValue("@user", passwordInfo.User);
-                command.Parameters.AddWithValue("@password_name", passwordInfo.PasswordName);
-                command.Parameters.AddWithValue("@password", passwordInfo.EncryptedPassword);
-                command.Parameters.AddWithValue("@aes_key", passwordInfo.AESKey);
-                command.Parameters.AddWithValue("@aes_iv", passwordInfo.AESIV);
-                command.ExecuteNonQuery();
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand("UPDATE PasswordData SET Password=@password, AESKey=@aes_key, AESIV=@aes_iv WHERE User=@user AND PasswordName=@password_name", connection))
+                {
+                    command.Parameters.AddWithValue("@user", passwordInfo.User);
+                    command.Parameters.AddWithValue("@password_name", passwordInfo.PasswordName);
+                    command.Parameters.AddWithValue("@password", passwordInfo.EncryptedPassword);
+                    command.Parameters.AddWithValue("@aes_key", passwordInfo.AESKey);
+                    command.Parameters.AddWithValue("@aes_iv", passwordInfo.AESIV);
+                    command.ExecuteNonQuery();
+                }
             }
+
+            MessageBox.Show("Password updated successfully!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        catch (Exception ex)
+        {
+            MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
     }
 
     public static void DeleteRecord(string user, string passwordName)
     {
-        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        try
         {
-            connection.Open();
-            using (MySqlCommand command = new MySqlCommand("DELETE FROM PasswordData WHERE User=@user AND PasswordName=@password_name", connection))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                command.Parameters.AddWithValue("@user", user);
-                command.Parameters.AddWithValue("@password_name", passwordName);
-                command.ExecuteNonQuery();
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand("DELETE FROM PasswordData WHERE User=@user AND PasswordName=@password_name", connection))
+                {
+                    command.Parameters.AddWithValue("@user", user);
+                    command.Parameters.AddWithValue("@password_name", passwordName);
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            MessageBox.Show("Password deleted successfully!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    public static List<string> GetPasswordNamesForUser(string user)
+    {
+        List<string> passwordNames = new List<string>();
+        try
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand("SELECT PasswordName FROM PasswordData WHERE User=@user", connection))
+                {
+                    command.Parameters.AddWithValue("@user", user);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string passwordName = reader.GetString("PasswordName");
+                            passwordNames.Add(passwordName);
+                        }
+                    }
+                }
             }
         }
+        catch (Exception ex)
+        {
+            MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        return passwordNames;
     }
 }
 

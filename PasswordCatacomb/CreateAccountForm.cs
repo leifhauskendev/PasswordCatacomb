@@ -27,6 +27,12 @@ namespace PasswordCatacomb
 
         private void createAccountButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(usernameTextBox.Text) || string.IsNullOrWhiteSpace(passwordTextBox.Text) || string.IsNullOrWhiteSpace(confirmPasswordTextBox.Text))
+            {
+                MessageBox.Show("Please fill out all the fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (passwordTextBox.Text != confirmPasswordTextBox.Text)
             {
                 MessageBox.Show("Passwords do not match, please try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -41,6 +41,7 @@
             this.updateRadioButton = new System.Windows.Forms.RadioButton();
             this.addRadioButton = new System.Windows.Forms.RadioButton();
             this.enterButton = new System.Windows.Forms.Button();
+            this.passwordNameComboBox = new System.Windows.Forms.ComboBox();
             this.optionsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,6 +114,7 @@
             this.autoGenerateCheckBox.Size = new System.Drawing.Size(15, 14);
             this.autoGenerateCheckBox.TabIndex = 6;
             this.autoGenerateCheckBox.UseVisualStyleBackColor = true;
+            this.autoGenerateCheckBox.CheckedChanged += new System.EventHandler(this.autoGenerateCheckBox_CheckedChanged);
             // 
             // optionsGroupBox
             // 
@@ -188,11 +190,23 @@
             this.enterButton.UseVisualStyleBackColor = true;
             this.enterButton.Click += new System.EventHandler(this.enterButton_Click);
             // 
+            // passwordNameComboBox
+            // 
+            this.passwordNameComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordNameComboBox.FormattingEnabled = true;
+            this.passwordNameComboBox.Location = new System.Drawing.Point(143, 132);
+            this.passwordNameComboBox.Name = "passwordNameComboBox";
+            this.passwordNameComboBox.Size = new System.Drawing.Size(184, 28);
+            this.passwordNameComboBox.TabIndex = 9;
+            this.passwordNameComboBox.Visible = false;
+            this.passwordNameComboBox.Leave += new System.EventHandler(this.passwordNameComboBox_Leave);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.passwordNameComboBox);
             this.Controls.Add(this.enterButton);
             this.Controls.Add(this.optionsGroupBox);
             this.Controls.Add(this.autoGenerateCheckBox);
@@ -226,6 +240,7 @@
         private System.Windows.Forms.RadioButton retrieveRadioButton;
         private System.Windows.Forms.RadioButton updateRadioButton;
         private System.Windows.Forms.Button enterButton;
+        private System.Windows.Forms.ComboBox passwordNameComboBox;
     }
 }
 

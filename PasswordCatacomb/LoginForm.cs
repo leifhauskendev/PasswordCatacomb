@@ -33,23 +33,36 @@ namespace PasswordCatacomb
 
         private void signInButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(usernameTextBox.Text) || string.IsNullOrWhiteSpace(passwordTextBox.Text)) 
+            {
+                MessageBox.Show("Please enter both a username and password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             UserInfo userInfo = new UserInfo();
             userInfo = UserDA.ReadRecord(usernameTextBox.Text);
 
-            string hashedPassword = UserInfo.HashStringWithArgon2(passwordTextBox.Text, userInfo.Salt);
-
-            userInfo.PasswordString = AesHelper.DecryptStringFromBytes(userInfo.EncryptedPassword, userInfo.AESKey, userInfo.AESIV);
-
-            if (hashedPassword == userInfo.PasswordString) 
+            if (userInfo.Username != null)
             {
-                Hide();
-                Form1 form1 = new Form1();
-                form1.ShowDialog();
-                Close();
+                string hashedPassword = UserInfo.HashStringWithArgon2(passwordTextBox.Text, userInfo.Salt);
+
+                userInfo.PasswordString = AesHelper.DecryptStringFromBytes(userInfo.EncryptedPassword, userInfo.AESKey, userInfo.AESIV);
+
+                if (hashedPassword == userInfo.PasswordString)
+                {
+                    Hide();
+                    Form1 form1 = new Form1(userInfo.Username);
+                    form1.ShowDialog();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Password is incorrect, please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("Username or password is incorrect, please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Username is incorrect, please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
