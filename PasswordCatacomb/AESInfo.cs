@@ -8,11 +8,14 @@ namespace PasswordCatacomb
 {
     public class AESInfo
     {
+        #region Private Fields
         private string _passwordString;
         private byte[] _encyrptedPassword;
         private byte[] _aesKey;
         private byte[] _aesIV;
+        #endregion
 
+        #region Public Properties
         public string PasswordString
         {
             get { return _passwordString; }
@@ -36,7 +39,9 @@ namespace PasswordCatacomb
             get { return _aesIV; }
             set { _aesIV = value; }
         }
+        #endregion
 
+        #region Methods
         public byte[] GetEncryptedPassword()
         {
             byte[] encryptedPassword = null;
@@ -66,5 +71,6 @@ namespace PasswordCatacomb
         {
             return AesHelper.GenerateIV();
         }
+        #endregion
     }
 }

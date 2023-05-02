@@ -15,9 +15,12 @@ namespace PasswordCatacomb
 {
     public partial class Form1 : Form
     {
+        #region Private Fields
         private PasswordInfo _passwordInfo = new PasswordInfo();
         private List<string> _passwordNamesForUser = new List<string>();
+        #endregion
 
+        #region Public Properties
         public PasswordInfo PasswordInfo
         {
             get { return _passwordInfo; }
@@ -29,7 +32,9 @@ namespace PasswordCatacomb
             get { return _passwordNamesForUser; }
             set { _passwordNamesForUser = value; }
         }
+        #endregion
 
+        #region Constructor
         public Form1(string user)
         {
             InitializeComponent();
@@ -38,17 +43,9 @@ namespace PasswordCatacomb
             passwordNameComboBox.DataSource = PasswordNamesForUser;
             EventLogger.AddLog("Log In", user);
         }
+        #endregion
 
-        //private void passwordNameTextBox_TextChanged(object sender, EventArgs e)
-        //{
-        //    PasswordInfo.PasswordName = passwordStringTextBox.Text;
-        //}
-
-        //private void passwordStringTextBox_TextChanged(object sender, EventArgs e)
-        //{
-        //    PasswordInfo.PasswordString = passwordStringTextBox.Text;
-        //}
-
+        #region Event Handlers
         private void radioButton_CheckedChanged(object sender, EventArgs e)
         {
             passwordNameTextBox.Text = string.Empty;
@@ -184,6 +181,20 @@ namespace PasswordCatacomb
             PasswordInfo.PasswordName = passwordNameComboBox.Text;
         }
 
+        private void autoGenerateCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (autoGenerateCheckBox.Checked)
+            {
+                PasswordInfo.PasswordString = passwordStringTextBox.Text = GenerateStrongPassword();
+            }
+            else
+            {
+                PasswordInfo.PasswordString = passwordStringTextBox.Text = string.Empty;
+            }
+        }
+        #endregion
+
+        #region Methods
         public static string GenerateStrongPassword()
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+=-{}[]\\|:;<>,.?/";
@@ -204,17 +215,6 @@ namespace PasswordCatacomb
                 return result.ToString();
             }
         }
-
-        private void autoGenerateCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (autoGenerateCheckBox.Checked)
-            {
-                PasswordInfo.PasswordString = passwordStringTextBox.Text = GenerateStrongPassword();
-            }
-            else
-            {
-                PasswordInfo.PasswordString = passwordStringTextBox.Text = string.Empty;
-            }
-        }
+        #endregion
     }
 }

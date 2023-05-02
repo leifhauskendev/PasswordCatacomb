@@ -5,8 +5,11 @@ using System.Text;
 
 public static class AesHelper
 {
+    #region Fields
     private static readonly byte[] salt = GenerateSalt();
+    #endregion
 
+    #region Encryption & Decryption
     public static byte[] EncryptStringToBytes(string plainText, byte[] key, byte[] iv)
     {
         if (plainText == null || plainText.Length <= 0)
@@ -15,6 +18,7 @@ public static class AesHelper
             throw new ArgumentNullException("key");
         if (iv == null || iv.Length <= 0)
             throw new ArgumentNullException("iv");
+
         byte[] encrypted;
         using (Aes aes = Aes.Create())
         {
@@ -46,6 +50,7 @@ public static class AesHelper
             throw new ArgumentNullException("key");
         if (iv == null || iv.Length <= 0)
             throw new ArgumentNullException("iv");
+
         string decrypted;
         using (Aes aes = Aes.Create())
         {
@@ -67,7 +72,9 @@ public static class AesHelper
         }
         return decrypted;
     }
+    #endregion
 
+    #region Generation Methods
     public static byte[] GenerateKey(string password)
     {
         using (var rfc = new Rfc2898DeriveBytes(password, salt))
@@ -95,6 +102,5 @@ public static class AesHelper
         }
         return salt;
     }
-
+    #endregion
 }
-

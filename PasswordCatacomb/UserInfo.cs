@@ -10,9 +10,12 @@ namespace PasswordCatacomb
 {
     public class UserInfo : AESInfo
     {
+        #region Private Fields
         private string _username;
         private byte[] _salt;
+        #endregion
 
+        #region Public Properties
         public string Username
         {
             get { return _username; }
@@ -24,7 +27,9 @@ namespace PasswordCatacomb
             get { return _salt; }
             set { _salt = value; }
         }
+        #endregion
 
+        #region Methods
         public static string HashStringWithArgon2(string passwordPlainText, byte[] salt)
         {
             var argon2 = new Argon2i(Encoding.UTF8.GetBytes(passwordPlainText))
@@ -39,5 +44,6 @@ namespace PasswordCatacomb
 
             return Convert.ToBase64String(hash);
         }
+        #endregion
     }
 }

@@ -12,19 +12,26 @@ namespace PasswordCatacomb
 {
     public partial class CreateAccountForm : Form
     {
+        #region Fields
         private UserInfo _userInfo = new UserInfo();
+        #endregion
 
+        #region Properties
         public UserInfo UserInfo
         {
             get { return _userInfo; }
             set { _userInfo = value; }
         }
+        #endregion
 
+        #region Constructor
         public CreateAccountForm()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Event Handlers
         private void createAccountButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(usernameTextBox.Text) || string.IsNullOrWhiteSpace(passwordTextBox.Text) || string.IsNullOrWhiteSpace(confirmPasswordTextBox.Text))
@@ -57,5 +64,6 @@ namespace PasswordCatacomb
         {
             UserInfo.PasswordString = passwordTextBox.Text;
         }
+        #endregion
     }
 }

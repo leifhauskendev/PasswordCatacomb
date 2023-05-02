@@ -12,19 +12,26 @@ namespace PasswordCatacomb
 {
     public partial class LoginForm : Form
     {
+        #region Private Fields
         private bool _valid = false;
+        #endregion
 
+        #region Public Properties
         public bool Valid
         {
             get { return _valid; }
             set { _valid = value; }
         }
+        #endregion
 
+        #region Constructor
         public LoginForm()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Event Handlers
         private void createAccountLabel_Click(object sender, EventArgs e)
         {
             CreateAccountForm createAccountForm = new CreateAccountForm();
@@ -33,12 +40,12 @@ namespace PasswordCatacomb
 
         private void signInButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(usernameTextBox.Text) || string.IsNullOrWhiteSpace(passwordTextBox.Text)) 
+            if (string.IsNullOrWhiteSpace(usernameTextBox.Text) || string.IsNullOrWhiteSpace(passwordTextBox.Text))
             {
                 MessageBox.Show("Please enter both a username and password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            
             UserInfo userInfo = new UserInfo();
             userInfo = UserDA.ReadRecord(usernameTextBox.Text);
 
@@ -65,5 +72,6 @@ namespace PasswordCatacomb
                 MessageBox.Show("Username is incorrect, please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
     }
 }
