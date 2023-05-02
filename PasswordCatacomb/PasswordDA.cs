@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using PasswordCatacomb;
 
 public static class PasswordDA
 {
@@ -27,6 +28,7 @@ public static class PasswordDA
             }
 
             MessageBox.Show("Password created successfully!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            EventLogger.AddLog("Password added", passwordInfo.User, passwordInfo.PasswordName);
         }
         catch (Exception ex)
         {
@@ -57,6 +59,7 @@ public static class PasswordDA
                 }
             }
         }
+        EventLogger.AddLog("Password retrieved", result.User, result.PasswordName);
         return result;
     }
 
@@ -79,6 +82,7 @@ public static class PasswordDA
             }
 
             MessageBox.Show("Password updated successfully!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            EventLogger.AddLog("Password updated", passwordInfo.User, passwordInfo.PasswordName);
         }
         catch (Exception ex)
         {
@@ -103,6 +107,7 @@ public static class PasswordDA
             }
 
             MessageBox.Show("Password deleted successfully!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            EventLogger.AddLog("Password deleted", user, passwordName);
         }
         catch (Exception ex)
         {
@@ -131,6 +136,8 @@ public static class PasswordDA
                     }
                 }
             }
+
+            EventLogger.AddLog("Password list for user retrieved", user);
         }
         catch (Exception ex)
         {

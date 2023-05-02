@@ -36,6 +36,7 @@ namespace PasswordCatacomb
             PasswordInfo.User = user;
             PasswordNamesForUser = PasswordDA.GetPasswordNamesForUser(user);
             passwordNameComboBox.DataSource = PasswordNamesForUser;
+            EventLogger.AddLog("Log In", user);
         }
 
         //private void passwordNameTextBox_TextChanged(object sender, EventArgs e)

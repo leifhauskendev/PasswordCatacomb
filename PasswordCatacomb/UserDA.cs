@@ -24,6 +24,8 @@ public static class UserDA
                     command.ExecuteNonQuery();
                 }
             }
+
+            EventLogger.AddLog("User Added", userInfo.Username);
         }
         catch (Exception ex)
         {
@@ -53,6 +55,9 @@ public static class UserDA
                 }
             }
         }
+
+        EventLogger.AddLog("User information retrieved", userInfo.Username);
+
         return userInfo;
     }
 }

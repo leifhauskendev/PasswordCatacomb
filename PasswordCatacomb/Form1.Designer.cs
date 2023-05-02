@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.titleTextBox = new System.Windows.Forms.TextBox();
             this.passwordNameLabel = new System.Windows.Forms.Label();
             this.passwordStringLabel = new System.Windows.Forms.Label();
             this.passwordNameTextBox = new System.Windows.Forms.TextBox();
@@ -42,26 +41,15 @@
             this.addRadioButton = new System.Windows.Forms.RadioButton();
             this.enterButton = new System.Windows.Forms.Button();
             this.passwordNameComboBox = new System.Windows.Forms.ComboBox();
+            this.titleLabel = new System.Windows.Forms.Label();
             this.optionsGroupBox.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // titleTextBox
-            // 
-            this.titleTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.titleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleTextBox.Location = new System.Drawing.Point(0, 0);
-            this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.ReadOnly = true;
-            this.titleTextBox.Size = new System.Drawing.Size(800, 44);
-            this.titleTextBox.TabIndex = 0;
-            this.titleTextBox.Text = "Password Catacomb";
-            this.titleTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // passwordNameLabel
             // 
             this.passwordNameLabel.AutoSize = true;
             this.passwordNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordNameLabel.Location = new System.Drawing.Point(12, 133);
+            this.passwordNameLabel.Location = new System.Drawing.Point(12, 108);
             this.passwordNameLabel.Name = "passwordNameLabel";
             this.passwordNameLabel.Size = new System.Drawing.Size(124, 20);
             this.passwordNameLabel.TabIndex = 1;
@@ -71,7 +59,7 @@
             // 
             this.passwordStringLabel.AutoSize = true;
             this.passwordStringLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordStringLabel.Location = new System.Drawing.Point(12, 177);
+            this.passwordStringLabel.Location = new System.Drawing.Point(58, 140);
             this.passwordStringLabel.Name = "passwordStringLabel";
             this.passwordStringLabel.Size = new System.Drawing.Size(78, 20);
             this.passwordStringLabel.TabIndex = 2;
@@ -80,7 +68,7 @@
             // passwordNameTextBox
             // 
             this.passwordNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordNameTextBox.Location = new System.Drawing.Point(143, 132);
+            this.passwordNameTextBox.Location = new System.Drawing.Point(142, 105);
             this.passwordNameTextBox.Name = "passwordNameTextBox";
             this.passwordNameTextBox.Size = new System.Drawing.Size(184, 26);
             this.passwordNameTextBox.TabIndex = 3;
@@ -89,7 +77,7 @@
             // passwordStringTextBox
             // 
             this.passwordStringTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordStringTextBox.Location = new System.Drawing.Point(143, 174);
+            this.passwordStringTextBox.Location = new System.Drawing.Point(142, 137);
             this.passwordStringTextBox.Name = "passwordStringTextBox";
             this.passwordStringTextBox.Size = new System.Drawing.Size(184, 26);
             this.passwordStringTextBox.TabIndex = 4;
@@ -99,7 +87,7 @@
             // 
             this.autoGenerateLabel.AutoSize = true;
             this.autoGenerateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.autoGenerateLabel.Location = new System.Drawing.Point(140, 203);
+            this.autoGenerateLabel.Location = new System.Drawing.Point(212, 168);
             this.autoGenerateLabel.Name = "autoGenerateLabel";
             this.autoGenerateLabel.Size = new System.Drawing.Size(93, 15);
             this.autoGenerateLabel.TabIndex = 5;
@@ -109,7 +97,7 @@
             // 
             this.autoGenerateCheckBox.AutoSize = true;
             this.autoGenerateCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.autoGenerateCheckBox.Location = new System.Drawing.Point(239, 204);
+            this.autoGenerateCheckBox.Location = new System.Drawing.Point(311, 169);
             this.autoGenerateCheckBox.Name = "autoGenerateCheckBox";
             this.autoGenerateCheckBox.Size = new System.Drawing.Size(15, 14);
             this.autoGenerateCheckBox.TabIndex = 6;
@@ -124,7 +112,7 @@
             this.optionsGroupBox.Controls.Add(this.addRadioButton);
             this.optionsGroupBox.Location = new System.Drawing.Point(13, 51);
             this.optionsGroupBox.Name = "optionsGroupBox";
-            this.optionsGroupBox.Size = new System.Drawing.Size(722, 46);
+            this.optionsGroupBox.Size = new System.Drawing.Size(314, 46);
             this.optionsGroupBox.TabIndex = 7;
             this.optionsGroupBox.TabStop = false;
             this.optionsGroupBox.Text = "options";
@@ -182,7 +170,7 @@
             // enterButton
             // 
             this.enterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.enterButton.Location = new System.Drawing.Point(589, 159);
+            this.enterButton.Location = new System.Drawing.Point(180, 189);
             this.enterButton.Name = "enterButton";
             this.enterButton.Size = new System.Drawing.Size(146, 41);
             this.enterButton.TabIndex = 8;
@@ -192,20 +180,35 @@
             // 
             // passwordNameComboBox
             // 
+            this.passwordNameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.passwordNameComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordNameComboBox.FormattingEnabled = true;
-            this.passwordNameComboBox.Location = new System.Drawing.Point(143, 132);
+            this.passwordNameComboBox.Location = new System.Drawing.Point(142, 103);
             this.passwordNameComboBox.Name = "passwordNameComboBox";
             this.passwordNameComboBox.Size = new System.Drawing.Size(184, 28);
             this.passwordNameComboBox.TabIndex = 9;
             this.passwordNameComboBox.Visible = false;
             this.passwordNameComboBox.Leave += new System.EventHandler(this.passwordNameComboBox_Leave);
             // 
+            // titleLabel
+            // 
+            this.titleLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.titleLabel.AutoEllipsis = true;
+            this.titleLabel.AutoSize = true;
+            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.Location = new System.Drawing.Point(12, 9);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(314, 37);
+            this.titleLabel.TabIndex = 10;
+            this.titleLabel.Text = "Password Catacomb";
+            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(341, 238);
+            this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.passwordNameComboBox);
             this.Controls.Add(this.enterButton);
             this.Controls.Add(this.optionsGroupBox);
@@ -215,9 +218,8 @@
             this.Controls.Add(this.passwordNameTextBox);
             this.Controls.Add(this.passwordStringLabel);
             this.Controls.Add(this.passwordNameLabel);
-            this.Controls.Add(this.titleTextBox);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Password Catacomb";
             this.optionsGroupBox.ResumeLayout(false);
             this.optionsGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -226,8 +228,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.Label passwordNameLabel;
         private System.Windows.Forms.Label passwordStringLabel;
         private System.Windows.Forms.TextBox passwordNameTextBox;
@@ -241,6 +241,7 @@
         private System.Windows.Forms.RadioButton updateRadioButton;
         private System.Windows.Forms.Button enterButton;
         private System.Windows.Forms.ComboBox passwordNameComboBox;
+        private System.Windows.Forms.Label titleLabel;
     }
 }
 
