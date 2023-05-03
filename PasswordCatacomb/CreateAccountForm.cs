@@ -46,12 +46,12 @@ namespace PasswordCatacomb
                 return;
             }
 
-            UserInfo.Salt = AesHelper.GenerateSalt();
+            UserInfo.Salt = AESInfo.GenerateSalt();
             UserInfo.PasswordString = UserInfo.HashStringWithArgon2(UserInfo.PasswordString, UserInfo.Salt);
 
-            UserInfo.AESKey = AesHelper.GenerateKey(UserInfo.PasswordString);
-            UserInfo.AESIV = AesHelper.GenerateIV();
-            UserInfo.EncryptedPassword = AesHelper.EncryptStringToBytes(UserInfo.PasswordString, UserInfo.AESKey, UserInfo.AESIV);
+            UserInfo.AESKey = AESInfo.GenerateKey(UserInfo.PasswordString);
+            UserInfo.AESIV = AESInfo.GenerateIV();
+            UserInfo.EncryptedPassword = AESInfo.EncryptStringToBytes(UserInfo.PasswordString, UserInfo.AESKey, UserInfo.AESIV);
             UserDA.CreateRecord(UserInfo);
         }
 

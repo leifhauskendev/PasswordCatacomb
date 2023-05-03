@@ -53,7 +53,7 @@ namespace PasswordCatacomb
             {
                 string hashedPassword = UserInfo.HashStringWithArgon2(passwordTextBox.Text, userInfo.Salt);
 
-                userInfo.PasswordString = AesHelper.DecryptStringFromBytes(userInfo.EncryptedPassword, userInfo.AESKey, userInfo.AESIV);
+                userInfo.PasswordString = AESInfo.DecryptStringFromBytes(userInfo.EncryptedPassword, userInfo.AESKey, userInfo.AESIV);
 
                 if (hashedPassword == userInfo.PasswordString)
                 {

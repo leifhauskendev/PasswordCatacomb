@@ -105,9 +105,9 @@ namespace PasswordCatacomb
                     return;
                 }
 
-                PasswordInfo.AESKey = AesHelper.GenerateKey(PasswordInfo.PasswordString);
-                PasswordInfo.AESIV = AesHelper.GenerateIV();
-                PasswordInfo.EncryptedPassword = AesHelper.EncryptStringToBytes(PasswordInfo.PasswordString, PasswordInfo.AESKey, PasswordInfo.AESIV);
+                PasswordInfo.AESKey = AESInfo.GenerateKey(PasswordInfo.PasswordString);
+                PasswordInfo.AESIV = AESInfo.GenerateIV();
+                PasswordInfo.EncryptedPassword = AESInfo.EncryptStringToBytes(PasswordInfo.PasswordString, PasswordInfo.AESKey, PasswordInfo.AESIV);
                 PasswordDA.CreateRecord(PasswordInfo);
                 passwordNameComboBox.DataSource = PasswordDA.GetPasswordNamesForUser(PasswordInfo.User);
                 passwordNameComboBox.Refresh();
@@ -120,9 +120,9 @@ namespace PasswordCatacomb
                     return;
                 }
 
-                PasswordInfo.AESKey = AesHelper.GenerateKey(PasswordInfo.PasswordString);
-                PasswordInfo.AESIV = AesHelper.GenerateIV();
-                PasswordInfo.EncryptedPassword = AesHelper.EncryptStringToBytes(PasswordInfo.PasswordString, PasswordInfo.AESKey, PasswordInfo.AESIV);
+                PasswordInfo.AESKey = AESInfo.GenerateKey(PasswordInfo.PasswordString);
+                PasswordInfo.AESIV = AESInfo.GenerateIV();
+                PasswordInfo.EncryptedPassword = AESInfo.EncryptStringToBytes(PasswordInfo.PasswordString, PasswordInfo.AESKey, PasswordInfo.AESIV);
                 PasswordDA.UpdateRecord(PasswordInfo);
             }
             else if (enterButton.Text == "Retrieve")
@@ -136,7 +136,7 @@ namespace PasswordCatacomb
                 PasswordInfo = PasswordDA.ReadRecord(PasswordInfo.User, PasswordInfo.PasswordName);
                 if (PasswordInfo.User != null)
                 {
-                    PasswordInfo.PasswordString = AesHelper.DecryptStringFromBytes(PasswordInfo.EncryptedPassword, PasswordInfo.AESKey, PasswordInfo.AESIV);
+                    PasswordInfo.PasswordString = AESInfo.DecryptStringFromBytes(PasswordInfo.EncryptedPassword, PasswordInfo.AESKey, PasswordInfo.AESIV);
                     passwordStringTextBox.Text = PasswordInfo.PasswordString;
                 }
                 else

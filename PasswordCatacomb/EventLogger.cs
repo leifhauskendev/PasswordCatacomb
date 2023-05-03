@@ -13,9 +13,9 @@ namespace PasswordCatacomb
     {
         private static string connectionString = "server=passwordcatacomb-v2.cj0eaa61ahln.us-east-2.rds.amazonaws.com;user=admin;database=sys;password=Bold0305%";
 
-        public static void AddLog(string eventType, string userName)
+        public static void AddLog(string eventType, string username)
         {
-            string message = string.Format("[{0}] User: {1} Event: {2}.", DateTime.Now, userName, eventType);
+            string message = string.Format("[{0}] User: {1} Event: {2}.", DateTime.Now, username, eventType);
 
             try
             {
@@ -35,9 +35,9 @@ namespace PasswordCatacomb
             }
         }
 
-        public static void AddLog(string eventType, string userName, string passwordName)
+        public static void AddLog(string eventType, string username, string passwordName)
         {
-            string message = string.Format("[{0}] User: {1} Event: {2} PasswordName: {3}.", DateTime.Now, userName, eventType, passwordName);
+            string message = string.Format("[{0}] User: {1} Event: {2} PasswordName: {3}.", DateTime.Now, username, eventType, passwordName);
 
             try
             {
